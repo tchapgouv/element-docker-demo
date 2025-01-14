@@ -82,6 +82,8 @@ services:
           - $ELEMENT_WEB_FQDN
           - $ELEMENT_CALL_FQDN
           - $MAS_FQDN
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       init:
         condition: service_completed_successfully
@@ -106,6 +108,8 @@ services:
     volumes:
       - ${VOLUME_PATH}/data/postgres:/var/lib/postgresql/data:rw
       - ${VOLUME_PATH}/scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
+    ports:
+     - 5433:5432
     networks:
       - backend
     environment:
@@ -207,23 +211,23 @@ services:
     depends_on:
       - synapse
 
-  mas:
-    image: ghcr.io/element-hq/matrix-authentication-service:latest
-    restart: unless-stopped
-    # ports:
-    #   - 8083:8080
-    volumes:
-      - ${VOLUME_PATH}/data/mas:/data:rw
-      - ${VOLUME_PATH}/data/ssl/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
-    networks:
-      - backend
-    # FIXME: do we also need to sync the db?
-    command: "server --config=/data/config.yaml"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      init:
-        condition: service_completed_successfully
+#  mas:
+#    image: ghcr.io/element-hq/matrix-authentication-service:latest
+#    restart: unless-stopped
+#    # ports:
+#    #   - 8083:8080
+#    volumes:
+#      - ${VOLUME_PATH}/data/mas:/data:rw
+#      - ${VOLUME_PATH}/data/ssl/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+#    networks:
+#      - backend
+#    # FIXME: do we also need to sync the db?
+#    command: "server --config=/data/config.yaml"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      init:
+#        condition: service_completed_successfully
 
   # as a basic local MTA
   mailhog:
