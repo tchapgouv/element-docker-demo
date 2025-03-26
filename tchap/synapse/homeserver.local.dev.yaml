@@ -103,10 +103,13 @@ experimental_features:
   msc3861: # OIDC
     enabled: true
     issuer: https://${DOMAIN}/
-    client_id: ${MAS_CLIENT_ID}
+#    client_id: ${MAS_CLIENT_ID}
+    client_id: '0000000000000000000SYNAPSE'
     client_auth_method: client_secret_basic
-    client_secret: '${SECRETS_MAS_CLIENT_SECRET}'
-    admin_token: '${SECRETS_MAS_MATRIX_SECRET}'
+#    client_secret: '${SECRETS_MAS_CLIENT_SECRET}'
+#    admin_token: '${SECRETS_MAS_MATRIX_SECRET}'
+    client_secret: '/DjWc4D3yyqgjYN8tum65g'
+    admin_token: '/DjWc4D3yyqgjYN8tum65g'
     account_management_url: "https://${MAS_FQDN}/account"
 
   # QR login

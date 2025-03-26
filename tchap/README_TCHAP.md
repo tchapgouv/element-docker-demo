@@ -6,7 +6,7 @@
 Then:
 
 ```````
-./setup.sh
+./setup-tchap.sh
 
 # Type your domain ie. : `tchapgouv.com`
 
@@ -14,6 +14,6 @@ Then:
 # Or if running on localhost with mkcert:
 # source .env; sudo sh -c "echo 127.0.0.1 $DOMAINS >> /etc/hosts"
 
-docker compose up
+docker compose -f compose-tchap.yml up
 # go to https://element.tchapgouv.com on your domain.
 ```
