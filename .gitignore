@@ -5,3 +5,4 @@
 .env.orig
 data
 secrets
+data-template/synapse/homeserver.yaml
