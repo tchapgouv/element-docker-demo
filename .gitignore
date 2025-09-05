@@ -5,6 +5,7 @@
 .env.orig
 data
 secrets
+tmp 
 
 # copied from start scripts
 data-template/synapse/homeserver.yaml

@@ -102,3 +102,12 @@ upstream_oauth2:
 experimental:
   access_token_ttl: 86400
   compat_token_ttl: 86400
+
+tchap:
+  identity_server_url: "http://localhost:8083"
+  email_lookup_fallback_rules: 
+  # match : the new email pattern
+  # search : the old email pattern
+  # old email in mail.numerique.gouv.fr
+  - match_with : '@numerique.gouv.fr'
+    search: '@beta.gouv.fr'

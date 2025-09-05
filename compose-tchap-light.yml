@@ -2,6 +2,7 @@
 
 networks:
   backend:
+    name: tchap_backend
 
 secrets:
   postgres_password:
@@ -235,29 +236,29 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     restart: unless-stopped
-    # ports:
-      # - 8025:8025
-      # - 1025:1025
+    ports:
+     - 8025:8025
+     - 1025:1025
     networks:
       - backend
 
-  element-web:
-    image: vectorim/element-web:latest
-    restart: unless-stopped
-    # ports:
-    #   - 8080:80
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:80/version || exit 1"]
-      start_period: "5s"
-      interval: "15s"
-      timeout: "5s"
-    networks:
-      - backend
-    volumes:
-      - ${VOLUME_PATH}/data/element-web/config.json:/app/config.json
-    depends_on:
-      init:
-        condition: service_completed_successfully
+  # element-web:
+  #   image: vectorim/element-web:latest
+  #   restart: unless-stopped
+  #   # ports:
+  #   #   - 8080:80
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:80/version || exit 1"]
+  #     start_period: "5s"
+  #     interval: "15s"
+  #     timeout: "5s"
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - ${VOLUME_PATH}/data/element-web/config.json:/app/config.json
+  #   depends_on:
+  #     init:
+  #       condition: service_completed_successfully
 
   # light
   # element-call:

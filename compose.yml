@@ -208,7 +208,7 @@ services:
       - synapse
 
   mas:
-    image: ghcr.io/element-hq/matrix-authentication-service:latest
+    image: ghcr.io/tchapgouv/matrix-authentication-service:sha-ea99ae2-debug
     restart: unless-stopped
     # ports:
     #   - 8083:8080
