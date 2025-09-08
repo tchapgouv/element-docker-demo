@@ -30,7 +30,7 @@ services:
   identity-mock:
     image: wiremock/wiremock:2.35.0
     ports:
-      - "${IDENTITY_MOCK_PORT:-8080}:8080"
+      - "${IDENTITY_MOCK_PORT:-8083}:8080"
     volumes:
       - ${VOLUME_PATH}/tchap/wiremock:/home/wiremock
     command:

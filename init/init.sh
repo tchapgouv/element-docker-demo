@@ -97,3 +97,6 @@ export DOLLAR='$' # evil hack to escape dollars in config files
 template "/data-template/element-web"
 template "/data-template/element-call"
 template "/data-template/nginx"
+
+#:tchap:
+template "/data-template/tchap-web"
