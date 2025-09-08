@@ -17,3 +17,5 @@ Then:
 ./start_tchap.sh
 # go to https://element.tchapgouv.com on your domain.
 ```
+
+if containers do not start, start them manually

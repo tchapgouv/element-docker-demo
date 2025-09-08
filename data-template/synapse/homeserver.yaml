@@ -52,7 +52,6 @@ public_baseurl: https://${HOMESERVER_FQDN}/
 suppress_key_server_warning: true
 
 send_federation: false
-#:tchap:
 # light
 # federation_sender_instances:
 #   - synapse-federation-sender-1
