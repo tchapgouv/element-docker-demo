@@ -1,5 +1,5 @@
+# deprecated, use compose.yml instead
 # FIXME: define a frontend & backend network, and only expose backend services to the frontend (nginx)
-
 networks:
   backend:
     name: tchap_backend
