@@ -3,9 +3,15 @@
 1. Install [Docker Compose](https://docs.docker.com/compose/install/).
 2. If you're running on your local workstation, then [install mkcert](https://github.com/FiloSottile/mkcert#installation) to manage TLS.
 
+Build the tchap web v4 image locally : 
+- checkout tchap_develop in repo tchap-web-v4
+- build the image in the root folder
+
+`docker build -t develop_tchap .`
+
 Then:
 
-```````
+```
 ./setup.sh
 
 # Type your domain ie. : `tchapgouv.com`
