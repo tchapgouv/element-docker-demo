@@ -19,3 +19,15 @@ Then:
 ```
 
 if containers do not start, start them manually
+
+## Local dev
+
+If you want to start your own MAS, change the variable in the start_tchap.sh to remove the `with_mas` value. 
+
+Same with tchap-web
+
+`export COMPOSE_PROFILES="tchap,with_mas,with_web"`
+
+Then you can start your component, with the configuration files in `data` folder.
+
+For instance for mas, you need to use the configuration file `data/mas/config.yaml`
