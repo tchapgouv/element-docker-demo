@@ -103,4 +103,4 @@ services:
     extra_hosts:
       - "sso.tchapgouv.com:host-gateway"
     profiles:
-      [with_mas, tchap]
+      [with_mas]
