@@ -1,5 +1,5 @@
 # FIXME: define a frontend & backend network, and only expose backend services to the frontend (nginx)
-
+#:tchap: add profile to start full/light environment
 networks:
   backend:
 
@@ -82,6 +82,11 @@ services:
           - $ELEMENT_WEB_FQDN
           - $ELEMENT_CALL_FQDN
           - $MAS_FQDN
+          #:tchap:
+          - $SSO_FQDN
+          #:tchap:
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
     depends_on:
       init:
         condition: service_completed_successfully
@@ -185,6 +190,9 @@ services:
       - synapse_signing_key
     depends_on:
       - synapse
+    #:tchap:
+    profiles:
+      [full]
 
   synapse-federation-sender-1:
     image: ghcr.io/element-hq/synapse:latest
@@ -206,6 +214,9 @@ services:
       - synapse_signing_key
     depends_on:
       - synapse
+    #:tchap:
+    profiles:
+      [full]
 
   mas:
     image: ghcr.io/element-hq/matrix-authentication-service:latest
@@ -224,14 +235,17 @@ services:
         condition: service_healthy
       init:
         condition: service_completed_successfully
+    #:tchap:
+    profiles:
+      [element]
 
   # as a basic local MTA
   mailhog:
     image: mailhog/mailhog:latest
     restart: unless-stopped
-    # ports:
-      # - 8025:8025
-      # - 1025:1025
+    ports:
+      - 8025:8025
+      - 1025:1025
     networks:
       - backend
 
@@ -252,6 +266,9 @@ services:
     depends_on:
       init:
         condition: service_completed_successfully
+    #:tchap:
+    profiles:
+      [element]
 
   element-call:
     image: ghcr.io/element-hq/element-call:latest-ci
@@ -265,6 +282,9 @@ services:
     depends_on:
       init:
         condition: service_completed_successfully
+    #:tchap:
+    profiles:
+      [full]
 
   livekit:
     image: livekit/livekit-server:latest
@@ -291,6 +311,9 @@ services:
         condition: service_completed_successfully
       redis:
         condition: service_started
+    #:tchap:
+    profiles:
+      [full]
 
   livekit-jwt:
     build:
@@ -321,3 +344,6 @@ services:
         condition: service_completed_successfully
       livekit:
         condition: service_started
+    #:tchap:
+    profiles:
+      [full]
