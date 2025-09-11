@@ -37,3 +37,7 @@ Same with tchap-web
 Then you can start your component, with the configuration files in `data` folder.
 
 For instance for mas, you need to use the configuration file `data/mas/config.yaml`
+
+## Mailhog
+
+you can access mailhog at this url : https://localhost:8025
