@@ -102,5 +102,6 @@ services:
         condition: service_completed_successfully
     extra_hosts:
       - "sso.tchapgouv.com:host-gateway"
+      - "mail.tchapgouv.com:host-gateway"
     profiles:
       [with_mas]

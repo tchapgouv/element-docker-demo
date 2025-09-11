@@ -14,7 +14,8 @@ Then:
 ```
 ./setup.sh
 
-# Type your domain ie. : `tchapgouv.com`
+# NOTE: it is important to use tchapgouv.com as a domain / our sydent mock is configure with this
+# Type your domain : `tchapgouv.com`
 
 # Point DNS for *.domain at your docker host,
 # Or if running on localhost with mkcert:
@@ -40,4 +41,4 @@ For instance for mas, you need to use the configuration file `data/mas/config.ya
 
 ## Mailhog
 
-you can access mailhog at this url : https://localhost:8025
+you can access mailhog at this url : https://mail.tchapgouv.com:8025
