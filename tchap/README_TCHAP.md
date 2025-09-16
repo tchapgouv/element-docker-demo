@@ -27,6 +27,46 @@ Then:
 
 if containers do not start, start them manually
 
+## Start custom services
+
+This integration environment starts multiple services from the Element and Tchap environment
+
+From Element environment : 
+ * Element Web
+ * Element Call
+ * Synapse
+ * Matrix Authentication Service
+ * LiveKit
+ * Postgres
+ * nginx + letsencrypt / mkcert for TLS.
+
+From tchap : 
+ * Tchap Web
+ * Identity server (mock)
+ * Tchap MAS
+ * Keycloak for OIDC upstream login
+
+With `.env` variable `COMPOSE_PROFILES` you can select which services to run. 
+
+By default the following services start with `COMPOSE_PROFILES="tchap,with_mas,with_web"` 
+ * Synapse
+ * Postgres
+ * nginx + letsencrypt / mkcert for TLS.
+ * Tchap Web
+ * Identity server (mock)
+ * Tchap MAS
+ * Keycloak for OIDC upstream login
+
+By using profiles `element` those services will start also : 
+ * Element Call
+ * Element Web
+ * Synapse
+ * LiveKit
+
+Note : Tchap MAS and Element MAS will conflict on port bindings
+
+If you specify `full`, additional workers for Synapse will start (TODO : also need tweak in synapse conf    )
+
 ## Local dev
 
 If you want to start your own MAS, change the variable in the start_tchap.sh to remove the `with_mas` value. 
