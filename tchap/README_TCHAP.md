@@ -44,7 +44,7 @@ From tchap :
  * Tchap Web
  * Identity server (mock)
  * Tchap MAS
-
+ * Keycloak for OIDC upstream login
 
 With `.env` variable `COMPOSE_PROFILES` you can select which services to run. 
 
