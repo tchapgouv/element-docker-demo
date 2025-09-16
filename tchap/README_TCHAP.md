@@ -65,8 +65,6 @@ By using profiles `element` those services will start also :
 
 Note : Tchap MAS and Element MAS will conflict on port bindings
 
-If you specify `full`, additional workers for Synapse will start (TODO : also need tweak in synapse conf    )
-
 ## Local dev
 
 If you want to start your own MAS, change the variable in the start_tchap.sh to remove the `with_mas` value. 

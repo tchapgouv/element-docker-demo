@@ -193,7 +193,7 @@ services:
       - synapse
     #:tchap:
     profiles:
-      [full]
+      [element]
 
   synapse-federation-sender-1:
     image: ghcr.io/element-hq/synapse:latest
@@ -217,7 +217,7 @@ services:
       - synapse
     #:tchap:
     profiles:
-      [full]
+      [element]
 
   mas:
     image: ghcr.io/element-hq/matrix-authentication-service:latest
