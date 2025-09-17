@@ -8,21 +8,6 @@ has_profile() {
     echo "$COMPOSE_PROFILES" | grep -q "$1"
 }
 
-# check that COMPOSE_PROFILES is correct, it must contains at least one of  with_tchap_mas or with_element_mas
-# one of with_element_web or with_tchap_web
-# tchap and element are not mandatory
-
-# Verify required profiles
-if ! (has_profile "with_tchap_mas" || has_profile "with_element_mas"); then
-    echo "ERROR: COMPOSE_PROFILES must contain at least one of 'with_tchap_mas' or 'with_element_mas'"
-    exit 1
-fi
-
-if ! (has_profile "with_element_web" || has_profile "with_tchap_web"); then
-    echo "ERROR: COMPOSE_PROFILES must contain at least one of 'with_element_web' or 'with_tchap_web'"
-    exit 1
-fi
-
 echo "COMPOSE_PROFILES validation successful: $COMPOSE_PROFILES"
 
 
@@ -36,7 +21,7 @@ fi
 export APP_WEB_SERVICE="http://element-web"
 if has_profile "with_tchap_web"; then
     echo "Using tchap-web service"
-    export APP_WEB_SERVICE="http://tchap-web"
+    export APP_WEB_SERVICE="http://host.docker.internal:8088"
 fi
 
 # Start with the base configuration
