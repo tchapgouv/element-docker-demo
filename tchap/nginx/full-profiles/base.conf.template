@@ -24,7 +24,7 @@ server {
 
     # XXX: is this right? or should auth.$DOMAIN be the issuer?
     location /.well-known/openid-configuration {
-        proxy_pass http://mas:8080;
+        proxy_pass http://host.docker.internal:8080;
         proxy_http_version 1.1;
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
     }
@@ -50,13 +50,14 @@ server {
 
     # XXX: is this right? or should auth.$DOMAIN be the issuer?
     location /.well-known/openid-configuration {
-        proxy_pass http://mas:8080;
+        proxy_pass http://host.docker.internal:8080;
         proxy_http_version 1.1;
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
     }
+}
 
 
-
+# WEB
 server {
     server_name ${ELEMENT_WEB_FQDN};
     server_tokens off;
@@ -64,23 +65,14 @@ server {
     include /etc/nginx/conf.d/include/ssl.conf;
 
     location / {
-        proxy_pass http://element-web;
+        #proxy_pass http://element-web;
+        proxy_pass ${APP_WEB_SERVICE};
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
     }
 }
 
-server {
-    server_name ${ELEMENT_CALL_FQDN};
-    server_tokens off;
 
-    include /etc/nginx/conf.d/include/ssl.conf;
-
-    location / {
-        proxy_pass http://element-call:8080;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-    }
-}
-
+# MAS
 server {
     server_name ${MAS_FQDN};
     server_tokens off;
@@ -88,40 +80,14 @@ server {
     include /etc/nginx/conf.d/include/ssl.conf;
 
     location / {
-        proxy_pass http://mas:8080;
+        #proxy_pass http://mas:8080;
+        proxy_pass ${MAS_SERVICE};
         proxy_http_version 1.1;
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
     }
 }
 
-server {
-    server_name ${LIVEKIT_FQDN};
-    server_tokens off;
-
-    include /etc/nginx/conf.d/include/ssl.conf;
-
-    location / {
-        proxy_pass http://livekit:7880;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade ${DOLLAR}http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host ${DOLLAR}host;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-    }
-}
-
-server {
-    server_name ${LIVEKIT_JWT_FQDN};
-    server_tokens off;
-
-    include /etc/nginx/conf.d/include/ssl.conf;
-
-    location / {
-        proxy_pass http://livekit-jwt:8080;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-    }
-}
-
+# Base synapse
 server {
     server_name ${HOMESERVER_FQDN};
     server_tokens off;
@@ -134,36 +100,13 @@ server {
 
     # pass auth to MAS
     location ~ ^/_matrix/client/(.*)/(login|logout|refresh) {
-        proxy_pass http://mas:8080;
+        proxy_pass http://host.docker.internal:8080;
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
     }
+    
+    ${WORKERS_CONFIG}
 
-    # use the generic worker as a synchrotron:
-    # taken from https://element-hq.github.io/synapse/latest/workers.html#synapseappgeneric_worker
-
-    location ~ ^/_matrix/client/(r0|v3)/sync${DOLLAR} {
-        proxy_pass http://synapse-generic-worker-1:8081;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-        proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
-    }
-
-    location ~ ^/_matrix/client/(api/v1|r0|v3)/events${DOLLAR} {
-        proxy_pass http://synapse-generic-worker-1:8081;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-        proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
-    }
-
-    location ~ ^/_matrix/client/(api/v1|r0|v3)/initialSync${DOLLAR} {
-        proxy_pass http://synapse-generic-worker-1:8081;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-        proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
-    }
-
-    location ~ ^/_matrix/client/(api/v1|r0|v3)/rooms/[^/]+/initialSync${DOLLAR} {
-        proxy_pass http://synapse-generic-worker-1:8081;
-        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
-        proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
-    }
+    ${IDENTITY_SERVER_CONFIG}
 
     location / {
         proxy_pass http://synapse:8008;
@@ -180,3 +123,16 @@ server {
     proxy_http_version 1.1;
 }
 
+#mailhog
+server {
+    server_name ${SMTP_HOST};
+    server_tokens off;
+
+    include /etc/nginx/conf.d/include/ssl.conf;
+
+    location / {
+        proxy_pass http://mailhog:8025;
+        proxy_http_version 1.1;
+        proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
+    }
+}

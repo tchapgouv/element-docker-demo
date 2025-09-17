@@ -53,6 +53,9 @@ services:
       - ${VOLUME_PATH}/data:/data
       - ${VOLUME_PATH}/data-template:/data-template
       - ${VOLUME_PATH}/init/init.sh:/init.sh
+      #:tchap:
+      - ${VOLUME_PATH}/tchap:/tchap
+      #:tchap:
     command: "/init.sh"
     env_file: .env
     depends_on:
@@ -193,7 +196,7 @@ services:
       - synapse
     #:tchap:
     profiles:
-      [element]
+      [with_workers]
 
   synapse-federation-sender-1:
     image: ghcr.io/element-hq/synapse:latest
@@ -217,7 +220,8 @@ services:
       - synapse
     #:tchap:
     profiles:
-      [element]
+      [with_workers]
+    #:tchap:
 
   mas:
     image: ghcr.io/element-hq/matrix-authentication-service:latest
@@ -238,7 +242,8 @@ services:
         condition: service_completed_successfully
     #:tchap:
     profiles:
-      [element]
+      [with_element_mas]
+    #:tchap:
 
   # as a basic local MTA
   mailhog:
@@ -269,7 +274,8 @@ services:
         condition: service_completed_successfully
     #:tchap:
     profiles:
-      [element]
+      [with_element_web]
+    #:tchap:
 
   element-call:
     image: ghcr.io/element-hq/element-call:latest-ci
@@ -285,7 +291,8 @@ services:
         condition: service_completed_successfully
     #:tchap:
     profiles:
-      [full]
+      [with_element_call]
+    #:tchap:
 
   livekit:
     image: livekit/livekit-server:latest
@@ -314,7 +321,8 @@ services:
         condition: service_started
     #:tchap:
     profiles:
-      [full]
+      [with_element_call]
+    #:tchap:
 
   livekit-jwt:
     build:
@@ -347,4 +355,5 @@ services:
         condition: service_started
     #:tchap:
     profiles:
-      [full]
+      [with_element_call]
+    #:tchap:

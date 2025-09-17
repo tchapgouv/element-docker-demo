@@ -98,5 +98,9 @@ template "/data-template/element-web"
 template "/data-template/element-call"
 template "/data-template/nginx"
 
+# Execute the nginx config assembly script
+echo "Assembling nginx configuration based on active profiles..."
+/tchap/nginx/assemble-nginx-config.sh
+
 #:tchap:
 template "/data-template/tchap-web"

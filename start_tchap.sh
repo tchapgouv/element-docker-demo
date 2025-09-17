@@ -2,9 +2,10 @@
 
 set -e
 
-docker compose down
+#remove all services
+docker compose --profile "*" down
 
-cp tchap/nginx/.app.local.dev.light.conf data-template/nginx/conf.d/app.conf
+
 cp tchap/synapse/homeserver.local.dev.light.yaml data-template/synapse/homeserver.yaml
 cp tchap/mas/config.local.dev.yaml data-template/mas/config.yaml
 cp tchap/tchap-web/config.local.json data-template/tchap-web/config.local.json

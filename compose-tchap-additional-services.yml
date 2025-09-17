@@ -82,7 +82,7 @@ services:
       init:
         condition: service_completed_successfully
     profiles:
-      [with_web]
+      [with_tchap_web]
 
   mas-tchap:
     image: ghcr.io/tchapgouv/matrix-authentication-service:release-tchap_202509_RC7
@@ -104,4 +104,4 @@ services:
       - "sso.tchapgouv.com:host-gateway"
       - "mail.tchapgouv.com:host-gateway"
     profiles:
-      [with_mas]
+      [with_tchap_mas]
