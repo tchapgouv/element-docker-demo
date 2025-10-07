@@ -19,7 +19,7 @@ Then:
 
 # Point DNS for *.domain at your docker host,
 # Or if running on localhost with mkcert:
-# source .env; sudo sh -c "echo 127.0.0.1 $DOMAINS >> /etc/hosts"
+source .env; sudo sh -c "echo 127.0.0.1 $DOMAINS >> /etc/hosts"
 
 ./start_tchap.sh
 # go to https://element.tchapgouv.com on your domain.
@@ -48,7 +48,7 @@ From tchap :
 
 With `.env` variable `COMPOSE_PROFILES` you can select which services to run. 
 
-By default the following services start with `COMPOSE_PROFILES="tchap,with_mas,with_web"` 
+By default the following services start with `COMPOSE_PROFILES="tchap,with_tchap_mas,with_tchap_web"` 
  * Synapse
  * Postgres
  * nginx + letsencrypt / mkcert for TLS.
@@ -57,15 +57,11 @@ By default the following services start with `COMPOSE_PROFILES="tchap,with_mas,w
  * Tchap MAS
  * Keycloak for OIDC upstream login
 
-By using profiles `element` those services will start also : 
+By using profiles `with_element_call` those services will start also : 
  * Element Call
- * Element Web
- * Synapse
  * LiveKit
 
-Note : Tchap MAS and Element MAS will conflict on port bindings
-
-If you specify `full`, additional workers for Synapse will start (TODO : also need tweak in synapse conf    )
+You can start Element Web `with_element_web` and default MAS `with_element_mas` services instead of tchap ones.
 
 ## Local dev
 

@@ -67,8 +67,8 @@ services:
   tchap-web:
     image: ghcr.io/tchapgouv/tchap-web-v4:latest
     restart: unless-stopped
-    # ports:
-    #   - 8080:80
+    ports:
+      - 8088:80
     healthcheck:
       test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:80/version || exit 1"]
       start_period: "5s"
@@ -82,7 +82,7 @@ services:
       init:
         condition: service_completed_successfully
     profiles:
-      [with_web]
+      [with_tchap_web]
 
   mas-tchap:
     image: ghcr.io/tchapgouv/matrix-authentication-service:release-tchap_202509_RC7
@@ -104,4 +104,4 @@ services:
       - "sso.tchapgouv.com:host-gateway"
       - "mail.tchapgouv.com:host-gateway"
     profiles:
-      [with_mas]
+      [with_tchap_mas]

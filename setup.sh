@@ -65,5 +65,6 @@ else
 fi
 
 if ! [ -z "$success" ]; then
-    echo ".env and SSL configured; you can now docker compose up"
+    #echo ".env and SSL configured; you can now docker compose up"
+    echo ".env and SSL configured; you can now ./start_tchap.sh"
 fi
