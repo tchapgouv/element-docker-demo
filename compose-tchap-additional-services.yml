@@ -85,7 +85,7 @@ services:
       [with_tchap_web]
 
   mas-tchap:
-    image: ghcr.io/tchapgouv/matrix-authentication-service:release-tchap_202509_RC7
+    image: ghcr.io/tchapgouv/matrix-authentication-service:main_tchap
     restart: unless-stopped
     ports:
       - 8080:8080
