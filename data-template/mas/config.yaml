@@ -262,5 +262,5 @@ rate_limiting:
   # based on source IP address.
   # This limit can protect against e-mail spam and against people registering too many accounts.
   registration:
-    burst: 500
+    burst: 500 #:tchap: needed for automatic testing
     per_second: 0.0008
