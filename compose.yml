@@ -146,7 +146,7 @@ services:
       - backend
 
   synapse:
-    image: ghcr.io/element-hq/synapse:latest
+    image: ghcr.io/element-hq/synapse:1.136
     user: $USER_ID:$GROUP_ID
     restart: unless-stopped
     volumes:
