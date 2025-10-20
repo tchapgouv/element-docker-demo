@@ -5,7 +5,7 @@ networks:
 
 services:
   postgres-keycloak:
-    image: postgres
+    image: postgres:15
     ports:
       - "${POSTGRES_PORT:-5434}:5432"
     environment:
@@ -65,7 +65,7 @@ services:
       [tchap]
 
   tchap-web:
-    image: ghcr.io/tchapgouv/tchap-web-v4:latest
+    image: ghcr.io/tchapgouv/tchap-web-v4:develop_tchap
     restart: unless-stopped
     ports:
       - 8088:80

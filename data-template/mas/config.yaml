@@ -187,6 +187,28 @@ telemetry:
   #   # DSN to use for sending errors and crashes to Sentry
   #   dsn: https://public@host:port/1
 
+experimental:
+  # Time-to-live of OAuth 2.0 access tokens in seconds. Defaults to 300, 5 minutes.
+  access_token_ttl: 30
+
+  # Time-to-live of compatibility access tokens in seconds, when refresh tokens are supported. Defaults to 300, 5 minutes.
+  #compat_token_ttl: 300
+
+  # Experimental feature to automatically expire inactive sessions
+  # Disabled by default
+  #inactive_session_expiration:
+     # Time after which an inactive session is automatically finished in seconds
+     #ttl: 32400
+
+     # Should compatibility sessions expire after inactivity. Defaults to true.
+     #expire_compat_sessions: true
+
+     # Should OAuth 2.0 sessions expire after inactivity. Defaults to true.
+     #expire_oauth_sessions: true
+
+     # Should user sessions expire after inactivity. Defaults to true.
+     #expire_user_sessions: true
+
 tchap:
   identity_server_url: "http://host.docker.internal:8083"
   email_lookup_fallback_rules: 
@@ -195,3 +217,50 @@ tchap:
   # old email in mail.numerique.gouv.fr
   - match_with : '@numerique.gouv.fr'
     search: '@beta.gouv.fr'
+
+
+rate_limiting:
+ # Limits how many account recovery attempts are allowed.
+  # These limits can protect against e-mail spam.
+  #
+  # Note: these limit also apply to recovery e-mail re-sends.
+  account_recovery:
+    # Controls how many account recovery attempts are permitted
+    # based on source IP address.
+    per_ip:
+      burst: 3
+      per_second: 0.0008
+
+    # Controls how many account recovery attempts are permitted
+    # based on the e-mail address that is being used for recovery.
+    per_address:
+      burst: 3
+      per_second: 0.0002
+
+  # Limits how many login attempts are allowed.
+  #
+  # Note: these limit also applies to password checks when a user attempts to
+  # change their own password.
+  login:
+    # Controls how many login attempts are permitted
+    # based on source IP address.
+    # This can protect against brute force login attempts.
+    per_ip:
+      burst: 200 #:tchap: needed for automatic testing
+      per_second: 0.05
+
+    # Controls how many login attempts are permitted
+    # based on the account that is being attempted to be logged into.
+    # This can protect against a distributed brute force attack
+    # but should be set high enough to prevent someone's account being
+    # casually locked out.
+    per_account:
+      burst: 1800
+      per_second: 0.5
+
+  # Limits how many registrations attempts are allowed,
+  # based on source IP address.
+  # This limit can protect against e-mail spam and against people registering too many accounts.
+  registration:
+    burst: 500 #:tchap: needed for automatic testing
+    per_second: 0.0008
