@@ -111,6 +111,8 @@ services:
 
   postgres:
     image: postgres:15 #tchap uses postgres 15
+    ports:
+      - "${SYNAPSE_POSTGRES_PORT:-5435}:5432"
     restart: unless-stopped
     volumes:
       - ${VOLUME_PATH}/data/postgres:/var/lib/postgresql:rw

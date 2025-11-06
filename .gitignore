@@ -10,3 +10,5 @@ tmp
 # copied from start scripts
 data-template/synapse/homeserver.yaml
 data-template/nginx/conf.d/app.conf
+
+.history
