@@ -170,6 +170,10 @@ services:
         condition: service_healthy
       init:
         condition: service_completed_successfully
+    #:tchap:
+    extra_hosts:
+      - "mail.tchapgouv.com:host-gateway"
+    #:tchap: end
 
   synapse-generic-worker-1:
     image: ghcr.io/element-hq/synapse:v1.136.0

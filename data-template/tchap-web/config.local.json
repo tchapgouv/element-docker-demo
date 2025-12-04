@@ -113,8 +113,8 @@
         "feature_screenshare_call": ["*"]
     },
     "tchap_mas_flow": {
-        "isActive": true,
-        "temp_activate_login_legacy_during_MAS_migration": true
+        "isActive": false,
+        "temp_activate_login_legacy_during_MAS_migration": false
     },
     "map_style_url": "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
     "element_call": {

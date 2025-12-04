@@ -66,6 +66,25 @@ redis:
   host: redis
   port: 6379
 
+## Registration ##
+# Enable registration for new users.
+enable_registration: true
+registrations_require_3pid:
+  - email
+
+# Enable password for login.
+password_config:
+  enabled: true
+  pepper: "eba8aeBae8ayahPhauvigiqu9Seiph2B"
+  policy:
+    enabled: true
+    minimum_length: 12
+    require_digit: true
+    require_symbol: true
+    require_lowercase: true
+    require_uppercase: true
+  
+
 # as we want our first launch and subsequent upgrades to go as fast
 # as possible don't sleep between background updates
 background_updates:
@@ -102,7 +121,7 @@ rc_message:
 
 experimental_features:
   msc3861: # OIDC
-    enabled: true
+    enabled: false
     issuer: https://${DOMAIN}/
     client_id: ${MAS_CLIENT_ID}
 #    client_id: '0000000000000000000SYNAPSE'
@@ -112,7 +131,7 @@ experimental_features:
     account_management_url: "https://${MAS_FQDN}/account"
 
   # QR login
-  msc4108_enabled: true
+  msc4108_enabled: false
 
   # MSC3266: Room summary API. Used for knocking over federation
   msc3266_enabled: true
