@@ -100,6 +100,14 @@ rc_message:
   per_second: 2
   burst_count: 15
 
+server_notices:
+  system_mxid_localpart: tchapinfo
+  room_name: Tchap Info
+  system_mxid_display_name: Tchap Info
+  system_mxid_avatar_url: "mxc://matrix.dev01.tchap.incubateur.net/48da39ff86859a4bbfba12d3eaf5231d9d97ae01"
+  room_avatar_url: "mxc://matrix.dev01.tchap.incubateur.net/48da39ff86859a4bbfba12d3eaf5231d9d97ae01"
+  auto_join: true
+
 experimental_features:
   msc3861: # OIDC
     enabled: true
