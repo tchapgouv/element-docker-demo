@@ -109,7 +109,8 @@ server {
     ${IDENTITY_SERVER_CONFIG}
 
     location / {
-        proxy_pass http://synapse:8008;
+        #proxy_pass http://synapse:8008;
+        proxy_pass ${SYNAPSE_SERVICE};
         proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
         proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
         proxy_set_header Host ${DOLLAR}host;
