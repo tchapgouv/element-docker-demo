@@ -62,7 +62,7 @@ For more info, see https://element.io/blog/experimenting-with-matrix-2-0-using-e
 Check the .env file, or customise the templates in `/data-templates` and then `docker compose down && docker compose up -d`.
 
 In particular, you may wish to:
- * Point at your own SMTP server rather than mailhog
+ * Point at your own SMTP server rather than mailpit
  * Use your own reverse proxy rather than the provided nginx
  * Use your own database cluster
 

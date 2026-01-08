@@ -77,4 +77,4 @@ For instance for mas, you need to use the configuration file `data/mas/config.ya
 
 ## Mailhog
 
-you can access mailhog at this url : https://mail.tchapgouv.com:8025
+you can access mailpit at this url : https://mail.tchapgouv.com:8025
