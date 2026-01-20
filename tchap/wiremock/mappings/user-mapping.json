@@ -8,7 +8,7 @@
         "equalTo": "email"
       },
       "address": {
-        "matches" : ".*@(numerique\\.gouv\\.fr|tchapgouv\\.com|beta\\.gouv\\.fr)$"
+        "matches" : ".*(numerique\\.gouv\\.fr|tchapgouv\\.com|beta\\.gouv\\.fr|tchap\\.incubateur\\.net)$"
       }
     }
   },
