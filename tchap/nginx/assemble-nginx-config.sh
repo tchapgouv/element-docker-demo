@@ -18,6 +18,13 @@ if has_profile "with_tchap_mas"; then
     export MAS_SERVICE="http://host.docker.internal:8080"
 fi
 
+export SYNAPSE_SERVICE="http://synapse:8008"
+# Update service variables based on active profiles
+if has_profile "with_local_synapse"; then
+    echo "Using synapse-tchap service"
+    export SYNAPSE_SERVICE="http://host.docker.internal:8008"
+fi
+
 export APP_WEB_SERVICE="http://element-web"
 if has_profile "with_tchap_web"; then
     echo "Using tchap-web service"
