@@ -25,8 +25,8 @@ if has_profile "with_local_synapse"; then
     export SYNAPSE_SERVICE="http://host.docker.internal:8008"
 fi
 
-export APP_WEB_SERVICE="http://element-web"
-if has_profile "with_tchap_web"; then
+export APP_WEB_SERVICE="http://element-web" 
+if has_profile "with_tchap_web"|| has_profile "with_local_tchap_web"; then
     echo "Using tchap-web service"
     export APP_WEB_SERVICE="http://host.docker.internal:8088"
 fi

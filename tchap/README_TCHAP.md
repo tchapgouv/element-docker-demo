@@ -67,9 +67,9 @@ You can start Element Web `with_element_web` and default MAS `with_element_mas` 
 
 If you want to start your own MAS, change the variable in the start_tchap.sh to remove the `with_mas` value. 
 
-Same with tchap-web
+If you want to start your own local tchap-web instance, use `with_local_tchap_web`
 
-`export COMPOSE_PROFILES="tchap,with_mas,with_web"`
+`export COMPOSE_PROFILES="tchap,with_tchap_mas,with_local_tchap_web"`
 
 Then you can start your component, with the configuration files in `data` folder.
 
