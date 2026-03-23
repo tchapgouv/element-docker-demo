@@ -35,7 +35,7 @@ services:
   generate-mas-secrets:
     restart: "no"
     #:tchap:
-    image: ghcr.io/tchapgouv/matrix-authentication-service:release-tchap_202509_RC7
+    image: ghcr.io/tchapgouv/matrix-authentication-service:main_tchap
     user: $USER_ID:$GROUP_ID
     volumes:
       - ${VOLUME_PATH}/data/mas:/data:rw
